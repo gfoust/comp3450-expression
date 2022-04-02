@@ -2,6 +2,7 @@
 
 #include <ostream>
 #include <map>
+#include <memory>
 #include <string>
 
 namespace expr {
@@ -23,6 +24,10 @@ namespace expr {
 
     virtual ~Expression() { 
     };
+
+    virtual std::unique_ptr<Expression> make_copy() const = 0;
+
+    virtual std::unique_ptr<Expression> make_move() = 0;
 
     virtual bool equals(const Expression& rhs) const = 0;
 

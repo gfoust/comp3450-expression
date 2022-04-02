@@ -8,20 +8,30 @@ Store globalStore = {
   { "z", 30 }
 };
 
-void printIt(Expression& expr) {
-  std::cout << expr << " ==> " << expr.evaluate(globalStore) << std::endl;
+void printIt(const char* name, const Expression& expr) {
+  std::cout << '[' << name << "] " << expr << " ==> " << expr.evaluate(globalStore) << std::endl;
 }
 
 int main() {
-  Literal n = 3;
-  printIt(n);
+  Literal n{ 3 };
+  printIt("n", n);
 
-  Variable v = "x";
-  printIt(v);
+  Variable v{ "x" };
+  printIt("v", v);
 
-  Plus p = { new Variable{ "y" }, new Literal{ 7 } };
-  printIt(p);
+  ExprRoot e = v;
+  v = "y";
+  printIt("v", v);
+  printIt("e", e);
 
-  Minus m = { new Times{ new Literal{ 2 }, new Variable{ "x" } }, new Variable{ "z" } };
-  printIt(m);
+  e = n;
+  printIt("e", e);
+
+  e = Plus{ Times{ Literal{ 2 }, Variable{ "x" } }, Variable{ "y" } };
+  printIt("e", e);
+
+  if (is<Operation>(e)) {
+    as<Operation>(e).rhs = e;
+    printIt("e", e);
+  }
 }

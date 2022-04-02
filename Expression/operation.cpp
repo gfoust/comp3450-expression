@@ -9,11 +9,11 @@ namespace expr {
   }
 
   std::ostream& Operation::print(std::ostream& out) const {
-    return out << '(' << *lhs << ' ' << name() << ' ' << *rhs << ')';
+    return out << '(' << lhs << ' ' << name() << ' ' << rhs << ')';
   }
 
   double Operation::evaluate(Store& store) const {
-    return exec(lhs->evaluate(store), rhs->evaluate(store));
+    return exec(lhs.evaluate(store), rhs.evaluate(store));
   }
 
 }

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "expression.hpp"
+#include "exprroot.hpp"
 
 namespace expr {
 
@@ -10,18 +11,14 @@ namespace expr {
   class Operation : public Expression {
   public:
 
-    Expression* lhs;
-    Expression* rhs;
+    ExprRoot lhs;
 
-    Operation(Expression* lhs, Expression* rhs) : lhs{ lhs }, rhs{ rhs } {
+    ExprRoot rhs;
+
+    Operation(ExprRoot lhs, ExprRoot rhs) : lhs{ std::move(lhs) }, rhs{ std::move(rhs) } {
     }
 
     // Overrides
-
-    ~Operation() override {
-      delete lhs;
-      delete rhs;
-    }
 
     bool equals(const Expression& rhs) const override;
 
@@ -45,6 +42,14 @@ namespace expr {
   public:
     using Operation::Operation;
 
+    std::unique_ptr<Expression> make_copy() const override { 
+      return std::make_unique<Plus>(*this); 
+    }
+
+    std::unique_ptr<Expression> make_move() override { 
+      return std::make_unique<Plus>(std::move(*this)); 
+    }
+
     char const* name() const override { 
       return "+"; 
     }
@@ -58,6 +63,14 @@ namespace expr {
   class Minus : public Operation {
   public:
     using Operation::Operation;
+    
+    std::unique_ptr<Expression> make_copy() const override { 
+      return std::make_unique<Minus>(*this); 
+    }
+
+    std::unique_ptr<Expression> make_move() override { 
+      return std::make_unique<Minus>(std::move(*this)); 
+    }
 
     char const* name() const override { 
       return "-"; 
@@ -72,6 +85,14 @@ namespace expr {
   class Times : public Operation {
   public:
     using Operation::Operation;
+    
+    std::unique_ptr<Expression> make_copy() const override { 
+      return std::make_unique<Times>(*this); 
+    }
+
+    std::unique_ptr<Expression> make_move() override { 
+      return std::make_unique<Times>(std::move(*this)); 
+    }
 
     char const* name() const override { 
       return "*"; 
@@ -86,6 +107,14 @@ namespace expr {
   class Divide : public Operation {
   public:
     using Operation::Operation;
+
+    std::unique_ptr<Expression> make_copy() const override {
+      return std::make_unique<Divide>(*this);
+    }
+
+    std::unique_ptr<Expression> make_move() override { 
+      return std::make_unique<Divide>(std::move(*this)); 
+    }
 
     char const* name() const override { 
       return "/"; 

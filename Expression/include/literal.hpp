@@ -22,6 +22,14 @@ namespace expr {
 
     // Overrides
 
+    std::unique_ptr<Expression> make_copy() const override {
+      return std::make_unique<Literal>(*this);
+    }
+
+    std::unique_ptr<Expression> make_move() override {
+      return std::make_unique<Literal>(std::move(*this));
+    }
+
     bool equals(const Expression& rhs) const override;
 
     std::ostream& print(std::ostream& out) const override;
