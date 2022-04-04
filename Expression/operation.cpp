@@ -4,8 +4,8 @@ namespace expr {
 
   bool Operation::equals(const Expression& other) const {
     return typeid(*this).operator ==(typeid(other)) &&
-      lhs == static_cast<Operation const&>(other).lhs &&
-      rhs == static_cast<Operation const&>(other).rhs;
+      lhs == static_cast<const Operation&>(other).lhs &&
+      rhs == static_cast<const Operation&>(other).rhs;
   }
 
   std::ostream& Operation::print(std::ostream& out) const {

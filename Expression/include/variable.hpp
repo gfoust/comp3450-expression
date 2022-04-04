@@ -6,6 +6,9 @@
 
 namespace expr {
 
+  /*========================================================
+   * Derived class for variables.
+   */
   class Variable : public Expression {
   public:
 
@@ -18,6 +21,8 @@ namespace expr {
       this->name = std::move(name);
       return *this;
     }
+
+    // Overrides
 
     bool equals(const Expression& rhs) const override;
 

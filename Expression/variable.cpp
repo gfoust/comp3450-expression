@@ -4,7 +4,7 @@ namespace expr {
 
   bool Variable::equals(const Expression& rhs) const {
     return typeid(Variable) == typeid(rhs) &&
-      name == static_cast<Variable const&>(rhs).name;
+      name == static_cast<const Variable&>(rhs).name;
   }
 
   std::ostream& Variable::print(std::ostream& out) const {

@@ -4,6 +4,9 @@
 
 namespace expr {
   
+  /*========================================================
+   * Derived class for numeric literals.
+   */
   class Literal : public Expression {
   public:
     
@@ -16,6 +19,8 @@ namespace expr {
       this->value = value;
       return *this;
     }
+
+    // Overrides
 
     bool equals(const Expression& rhs) const override;
 
