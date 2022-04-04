@@ -27,7 +27,6 @@ namespace expr {
     std::ostream& print(std::ostream& out) const override;
 
     double evaluate(Store& store) const override;
-
   };
 
 }

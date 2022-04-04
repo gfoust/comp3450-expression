@@ -1,8 +1,5 @@
 #pragma once
 
-#include <memory>
-#include <ostream>
-#include <utility>
 #include "expression.hpp"
 
 namespace expr {

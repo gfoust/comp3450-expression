@@ -29,17 +29,18 @@ namespace expr {
     virtual std::ostream& print(std::ostream& out) const = 0;
 
     virtual double evaluate(Store& store) const = 0;
-
-    // Helper operators
-
-    friend std::ostream& operator <<(std::ostream& out, const Expression& expr) {
-      return expr.print(out);
-    }
-
-    friend bool operator ==(const Expression& lhs, const Expression& rhs) {
-      return lhs.equals(rhs);
-    }
-
   };
+
+  /*========================================================
+   * Operators for all Expressions
+   */
+
+  inline std::ostream& operator <<(std::ostream& out, const Expression& expr) {
+    return expr.print(out);
+  }
+
+  inline bool operator ==(const Expression& lhs, const Expression& rhs) {
+    return lhs.equals(rhs);
+  }
 
 }
