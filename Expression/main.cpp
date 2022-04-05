@@ -19,12 +19,14 @@ int main() {
   Variable v{ "x" };
   printIt("v", v);
 
-  ExprRoot e = v;
-  v = "y";
-  printIt("v", v);
+  ExprRoot e = n;
   printIt("e", e);
 
-  e = n;
+  e = v;
+  printIt("e", e);
+
+  v = "y";
+  printIt("v", v);
   printIt("e", e);
 
   e = Plus{ Times{ Literal{ 2 }, Variable{ "x" } }, Variable{ "y" } };
