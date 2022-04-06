@@ -26,8 +26,8 @@ int main() {
   printIt("e", e);
 
   v = "y";
-  printIt("v", v);
   printIt("e", e);
+  printIt("v", v);
 
   e = Plus{ Times{ Literal{ 2 }, Variable{ "x" } }, Variable{ "y" } };
   printIt("e", e);
